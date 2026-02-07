@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Moya & Esa </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-soft: #fce7f3;
+            --pink-accent: #db2777;
+            --glow-pink: #ff69b4;
+        }
+
+        * {
+            -webkit-touch-callout: none; /* Disable context menu di Safari */
+            -webkit-user-select: none;   /* Disable text selection */
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            touch-action: none;
+            background-color: var(--pink-soft);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .world {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #fce7f3 0%, #fbcfe8 100%);
+        }
+
+        .character {
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+
+        /* Animasi Sketsa Hati Pink */
+        .sketch-heart {
+            font-family: 'Sacramento', cursive;
+            font-size: 35px;
+            color: var(--glow-pink);
+            position: absolute;
+            top: -45px;
+            filter: drop-shadow(0 0 8px var(--glow-pink)) drop-shadow(0 0 15px #ffb6c1);
+            animation: heartBeat 1.5s ease-in-out infinite, scribble 0.2s steps(2) infinite;
+            pointer-events: none;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1) rotate(-5deg); }
+            50% { transform: scale(1.2) rotate(5deg); }
+        }
+
+        @keyframes scribble {
+            0% { translate: -1px 1px; rotate: 2deg; }
+            50% { translate: 1px -1px; rotate: -2deg; }
+        }
+
+        .photo-frame {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 12px rgba(219, 39, 119, 0.2));
+        }
+
+        .name-label {
+            margin-top: 8px;
+            padding: 2px 14px;
+            background-color: #ec4899;
+            color: white;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Trail Hati Kecil saat Jalan */
+        .love-trail {
+            position: absolute;
+            pointer-events: none;
+            color: #f472b6;
+            font-size: 16px;
+            z-index: 15;
+            animation: popOut 0.8s ease-out forwards;
+        }
+
+        @keyframes popOut {
+            0% { transform: scale(0) translateY(0); opacity: 1; }
+            100% { transform: scale(1.5) translateY(-50px); opacity: 0; }
+        }
+
+        /* D-Pad Responsive untuk Safari iOS */
+        .d-pad {
+            position: absolute;
+            bottom: 40px;
+            right: 30px;
+            display: grid;
+            grid-template-areas: ". up ." "left . right" ". down .";
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .btn-game {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pink-accent);
+            font-size: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+        }
+
+        .btn-game:active {
+            background: white;
+            transform: scale(0.92);
+        }
+
+        .bubble-pro {
+            position: absolute;
+            bottom: 120%;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 18px;
+            border-bottom-left-radius: 2px;
+            color: #be185d;
+            font-weight: 700;
+            font-size: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            white-space: nowrap;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="world" id="world">
+    <div class="absolute top-12 left-0 w-full text-center z-50">
+        <h1 class="text-pink-600 text-5xl" style="font-family: 'Sacramento', cursive;">Happy Valentine's Day</h1>
+        <p class="text-[10px] font-bold text-pink-400 tracking-[0.3em] uppercase mt-2">Dekati Esa untuk menemukan pesan</p>
+    </div>
+
+    <div id="esa" class="character" style="top: 45%; left: 70%;">
+        <div class="bubble-pro">Happy Valentine's Day, Moya Barida ❤</div>
+        <img src="esa.png" alt="Esa" class="photo-frame">
+        <div class="name-label">Esa</div>
+    </div>
+
+    <div id="moya" class="character" style="top: 45%; left: 15%;">
+        <div class="sketch-heart">❤</div>
+        <img src="moya.png" alt="Moya" class="photo-frame" id="moya-img">
+        <div class="name-label">Moya</div>
+    </div>
+
+    <div class="d-pad">
+        <button id="up" style="grid-area: up;" class="btn-game">▲</button>
+        <button id="left" style="grid-area: left;" class="btn-game">◀</button>
+        <button id="right" style="grid-area: right;" class="btn-game">▶</button>
+        <button id="down" style="grid-area: down;" class="btn-game">▼</button>
+    </div>
+</div>
+
+<script>
+    const moya = document.getElementById('moya');
+    const moyaImg = document.getElementById('moya-img');
+    const esa = document.getElementById('esa');
+    const world = document.getElementById('world');
+
+    let posX = window.innerWidth * 0.15;
+    let posY = window.innerHeight * 0.45;
+    const speed = 5;
+    const input = { up: false, down: false, left: false, right: false };
+
+    // Partikel hati saat bergerak
+    function createLoveParticle(x, y) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤';
+        heart.className = 'love-trail';
+        heart.style.left = (x + 35) + 'px';
+        heart.style.top = (y + 20) + 'px';
+        world.appendChild(heart);
+        setTimeout(() => heart.remove(), 800);
+    }
+
+    // Game Loop
+    function update() {
+        let moving = false;
+        if (input.up) { posY -= speed; moving = true; }
+        if (input.down) { posY += speed; moving = true; }
+        if (input.left) { posX -= speed; moving = true; }
+        if (input.right) { posX += speed; moving = true; }
+
+        // Batas Layar
+        posX = Math.max(0, Math.min(window.innerWidth - 85, posX));
+        posY = Math.max(100, Math.min(window.innerHeight - 150, posY));
+
+        moya.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+        moya.style.left = "0"; 
+        moya.style.top = "0";
+
+        if (moving) {
+            moyaImg.style.transform = `rotate(${Math.sin(Date.now() / 100) * 8}deg)`;
+            if (Math.random() > 0.85) createLoveParticle(posX, posY);
+        } else {
+            moyaImg.style.transform = `rotate(0deg)`;
+        }
+
+        checkDistance();
+        requestAnimationFrame(update);
+    }
+
+    function checkDistance() {
+        const m = moya.getBoundingClientRect();
+        const e = esa.getBoundingClientRect();
+        
+        const dx = (m.left + m.width/2) - (e.left + e.width/2);
+        const dy = (m.top + m.height/2) - (e.top + e.height/2);
+        const distance = Math.sqrt(dx*dx + dy*dy);
+
+        if (distance < 70) {
+            document.body.style.transition = 'opacity 1s ease-in-out';
+            document.body.style.opacity = '0';
+            setTimeout(() => { 
+                window.location.href = "surat.html"; 
+            }, 1000);
+        }
+    }
+
+    // Handler Input Khusus Safari
+    const setupButton = (id, key) => {
+        const btn = document.getElementById(id);
+        
+        const start = (e) => {
+            e.preventDefault();
+            input[key] = true;
+        };
+        
+        const end = (e) => {
+            e.preventDefault();
+            input[key] = false;
+        };
+
+        btn.addEventListener('touchstart', start, { passive: false });
+        btn.addEventListener('touchend', end, { passive: false });
+        btn.addEventListener('mousedown', start);
+        window.addEventListener('mouseup', end);
+    };
+
+    setupButton('up', 'up');
+    setupButton('down', 'down');
+    setupButton('left', 'left');
+    setupButton('right', 'right');
+
+    // Mencegah scroll/zoom saat main di Safari
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+
+    requestAnimationFrame(update);
+</script>
+
+</body>
+</html>
