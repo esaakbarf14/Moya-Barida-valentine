@@ -2,264 +2,287 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For Moya Barida | Valentine 2026</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Happy Valentine's Day Moya Barida </title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Sacramento&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Palette Soft Pink & Rose */
-            --soft-pink: #fce4ec;
-            --mid-pink: #f8bbd0;
-            --accent-pink: #f06292;
-            --text-gray: #5d4037;
-            --glass: rgba(255, 255, 255, 0.9);
+            --pink-soft: #fce7f3;
+            --pink-accent: #db2777;
+            --glow-pink: #ff69b4;
+        }
+
+        * {
+            -webkit-touch-callout: none; /* Disable context menu di Safari */
+            -webkit-user-select: none;   /* Disable text selection */
+            user-select: none;
         }
 
         body {
-            background: radial-gradient(circle, #ffffff 0%, #fff0f3 100%);
-            font-family: 'Montserrat', sans-serif;
-            overflow: hidden;
-            height: 100dvh;
+            font-family: 'Quicksand', sans-serif;
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding-bottom: 8vh;
-            -webkit-tap-highlight-color: transparent;
+            padding: 0;
+            overflow: hidden;
+            touch-action: none;
+            background-color: var(--pink-soft);
+            width: 100vw;
+            height: 100vh;
         }
 
-        /* Overlay lembut di pinggir layar */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle, transparent 60%, rgba(252, 228, 236, 0.4) 100%);
+        .world {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #fce7f3 0%, #fbcfe8 100%);
+        }
+
+        .character {
+            position: absolute;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+
+        /* Animasi Sketsa Hati Pink */
+        .sketch-heart {
+            font-family: 'Sacramento', cursive;
+            font-size: 35px;
+            color: var(--glow-pink);
+            position: absolute;
+            top: -45px;
+            filter: drop-shadow(0 0 8px var(--glow-pink)) drop-shadow(0 0 15px #ffb6c1);
+            animation: heartBeat 1.5s ease-in-out infinite, scribble 0.2s steps(2) infinite;
             pointer-events: none;
         }
 
-        .serif { font-family: 'Playfair Display', serif; }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1) rotate(-5deg); }
+            50% { transform: scale(1.2) rotate(5deg); }
         }
 
-        .main-container {
-            position: relative;
-            z-index: 10;
+        @keyframes scribble {
+            0% { translate: -1px 1px; rotate: 2deg; }
+            50% { translate: 1px -1px; rotate: -2deg; }
+        }
+
+        .photo-frame {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 12px rgba(219, 39, 119, 0.2));
+        }
+
+        .name-label {
+            margin-top: 8px;
+            padding: 2px 14px;
+            background-color: #ec4899;
+            color: white;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Trail Hati Kecil saat Jalan */
+        .love-trail {
+            position: absolute;
+            pointer-events: none;
+            color: #f472b6;
+            font-size: 16px;
+            z-index: 15;
+            animation: popOut 0.8s ease-out forwards;
+        }
+
+        @keyframes popOut {
+            0% { transform: scale(0) translateY(0); opacity: 1; }
+            100% { transform: scale(1.5) translateY(-50px); opacity: 0; }
+        }
+
+        /* D-Pad Responsive untuk Safari iOS */
+        .d-pad {
+            position: absolute;
+            bottom: 40px;
+            right: 30px;
+            display: grid;
+            grid-template-areas: ". up ." "left . right" ". down .";
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .btn-game {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid white;
+            border-radius: 15px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            animation: floating 4s ease-in-out infinite;
-        }
-
-        .envelope-wrapper {
-            perspective: 1000px;
+            justify-content: center;
+            color: var(--pink-accent);
+            font-size: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            -webkit-tap-highlight-color: transparent;
             cursor: pointer;
         }
 
-        .envelope {
-            position: relative;
-            width: 260px;
-            height: 160px;
-            background: #f8bbd0; /* Soft Rose */
-            border-radius: 0 0 12px 12px;
-            box-shadow: 0 15px 35px rgba(240, 98, 146, 0.15);
-            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Penutup Amplop */
-        .envelope::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            z-index: 4;
-            border-top: 100px solid #fce4ec;
-            border-left: 130px solid transparent;
-            border-right: 130px solid transparent;
-            transform-origin: top;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .envelope.open::before {
-            transform: rotateX(180deg);
-            z-index: 0;
-        }
-
-        /* Kartu di Dalam */
-        .card-inner {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 240px;
-            height: 140px;
-            background: var(--glass);
-            backdrop-filter: blur(8px);
-            border: 1px solid white;
-            border-radius: 12px;
-            z-index: 1;
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            padding: 25px 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .envelope.open .card-inner {
-            transform: translateY(-170px); 
-            height: 360px;
-            width: 300px;
-            left: -20px;
-            box-shadow: 0 25px 50px rgba(93, 64, 55, 0.08);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Tombol Play Soft */
-        .play-btn {
-            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
-            border: 1px solid white;
-            color: #f06292;
-            box-shadow: 0 4px 15px rgba(240, 98, 146, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.05);
+        .btn-game:active {
             background: white;
+            transform: scale(0.92);
         }
 
-        .falling-element {
-            position: fixed;
-            top: -10%;
-            z-index: 1;
-            pointer-events: none;
-            animation: fall linear forwards;
+        .bubble-pro {
+            position: absolute;
+            bottom: 120%;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 18px;
+            border-bottom-left-radius: 2px;
+            color: #be185d;
+            font-weight: 700;
+            font-size: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            white-space: nowrap;
+            animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.6; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
     </style>
 </head>
 <body>
 
-    <div id="particles-container"></div>
-
-    <div class="main-container">
-        <div class="mb-8">
-            <span class="bg-white/90 px-5 py-2 rounded-full border border-pink-100 text-pink-400 text-[11px] font-medium tracking-[0.25em] uppercase shadow-sm">
-                For the prettiest girl, Moya Barida 💕
-            </span>
-        </div>
-
-        <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
-            <div class="envelope">
-                <div class="card-inner">
-                    <div>
-                        <p class="text-[10px] uppercase tracking-[0.4em] text-pink-300 font-semibold mb-2">Happy Valentine's Day</p>
-                        <h1 class="serif text-3xl text-gray-700 italic">Moya Barida</h1>
-                        <div class="flex justify-center items-center gap-3 mt-4">
-                             <div class="w-10 h-[1px] bg-pink-100"></div>
-                             <span class="text-pink-200 text-xs">✿</span>
-                             <div class="w-10 h-[1px] bg-pink-100"></div>
-                        </div>
-                    </div>
-
-                    <div class="relative py-6">
-                        <div class="relative flex flex-col items-center">
-                            <button id="playBtn" onclick="playVoice(event)" class="play-btn w-16 h-16 rounded-full flex items-center justify-center relative z-10">
-                                <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                            </button>
-                            <p id="statusText" class="text-[10px] text-pink-300 mt-3 font-medium uppercase tracking-[0.15em]">Listen to me</p>
-                        </div>
-                    </div>
-
-                    <div class="pb-2 px-4">
-                        <p class="serif text-[15px] italic text-gray-500 leading-relaxed">
-                            "to be love to be seen"
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <p class="mt-10 text-[11px] text-pink-300 tracking-[0.6em] uppercase opacity-60 font-medium">Buka Pesanmu</p>
+<div class="world" id="world">
+    <div class="absolute top-12 left-0 w-full text-center z-50">
+        <h1 class="text-pink-600 text-5xl" style="font-family: 'Sacramento', cursive;">Happy Valentine's Day</h1>
+        <p class="text-[10px] font-bold text-pink-400 tracking-[0.3em] uppercase mt-2">Dekati Esa untuk menemukan pesan</p>
     </div>
 
-    <audio id="audioSource" preload="auto" playsinline>
-        <source src="moya.mp3" type="audio/mpeg">
-    </audio>
+    <div id="esa" class="character" style="top: 45%; left: 70%;">
+        <div class="bubble-pro">Happy Valentine's Day, Moya Barida ❤</div>
+        <img src="esa.png" alt="Esa" class="photo-frame">
+        <div class="name-label">Esa</div>
+    </div>
 
-    <script>
-        const audio = document.getElementById('audioSource');
-        const playBtn = document.getElementById('playBtn');
-        const statusText = document.getElementById('statusText');
+    <div id="moya" class="character" style="top: 45%; left: 15%;">
+        <div class="sketch-heart">❤</div>
+        <img src="moya.png" alt="Moya" class="photo-frame" id="moya-img">
+        <div class="name-label">Moya</div>
+    </div>
 
-        function toggleEnvelope(el) {
-            const envelope = el.querySelector('.envelope');
-            if(!envelope.classList.contains('open')) {
-                envelope.classList.add('open');
-                // Trigger kelopak bunga/partikel saat dibuka
-                for(let i=0; i<12; i++) {
-                    setTimeout(createParticle, i * 80);
-                }
-                // Unlock audio context untuk mobile
-                audio.play().then(() => { audio.pause(); }).catch(() => {});
-            } else {
-                envelope.classList.remove('open');
-                audio.pause();
-                resetBtn();
-            }
+    <div class="d-pad">
+        <button id="up" style="grid-area: up;" class="btn-game">▲</button>
+        <button id="left" style="grid-area: left;" class="btn-game">◀</button>
+        <button id="right" style="grid-area: right;" class="btn-game">▶</button>
+        <button id="down" style="grid-area: down;" class="btn-game">▼</button>
+    </div>
+</div>
+
+<script>
+    const moya = document.getElementById('moya');
+    const moyaImg = document.getElementById('moya-img');
+    const esa = document.getElementById('esa');
+    const world = document.getElementById('world');
+
+    let posX = window.innerWidth * 0.15;
+    let posY = window.innerHeight * 0.45;
+    const speed = 5;
+    const input = { up: false, down: false, left: false, right: false };
+
+    // Partikel hati saat bergerak
+    function createLoveParticle(x, y) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤';
+        heart.className = 'love-trail';
+        heart.style.left = (x + 35) + 'px';
+        heart.style.top = (y + 20) + 'px';
+        world.appendChild(heart);
+        setTimeout(() => heart.remove(), 800);
+    }
+
+    // Game Loop
+    function update() {
+        let moving = false;
+        if (input.up) { posY -= speed; moving = true; }
+        if (input.down) { posY += speed; moving = true; }
+        if (input.left) { posX -= speed; moving = true; }
+        if (input.right) { posX += speed; moving = true; }
+
+        // Batas Layar
+        posX = Math.max(0, Math.min(window.innerWidth - 85, posX));
+        posY = Math.max(100, Math.min(window.innerHeight - 150, posY));
+
+        moya.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+        moya.style.left = "0"; 
+        moya.style.top = "0";
+
+        if (moving) {
+            moyaImg.style.transform = `rotate(${Math.sin(Date.now() / 100) * 8}deg)`;
+            if (Math.random() > 0.85) createLoveParticle(posX, posY);
+        } else {
+            moyaImg.style.transform = `rotate(0deg)`;
         }
 
-        function playVoice(event) {
-            event.stopPropagation();
-            if (audio.paused) {
-                audio.play();
-                statusText.innerText = "Playing... ♡";
-                playBtn.innerHTML = `<svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
-            } else {
-                audio.pause();
-                statusText.innerText = "Paused";
-                playBtn.innerHTML = `<svg class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>`;
-            }
-        }
+        checkDistance();
+        requestAnimationFrame(update);
+    }
 
-        function resetBtn() {
-            statusText.innerText = "Listen to me";
-            playBtn.innerHTML = `<svg class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>`;
-        }
+    function checkDistance() {
+        const m = moya.getBoundingClientRect();
+        const e = esa.getBoundingClientRect();
+        
+        const dx = (m.left + m.width/2) - (e.left + e.width/2);
+        const dy = (m.top + m.height/2) - (e.top + e.height/2);
+        const distance = Math.sqrt(dx*dx + dy*dy);
 
-        function createParticle() {
-            const container = document.getElementById('particles-container');
-            const p = document.createElement('div');
-            p.className = 'falling-element';
-            
-            // Randomize antara hati kecil dan bunga sakura
-            const isHeart = Math.random() > 0.5;
-            p.innerHTML = isHeart ? 
-                `<svg width="12" height="12" viewBox="0 0 24 24" fill="#f8bbd0" style="opacity:0.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>` : 
-                `<span style="color:#fce4ec; font-size:12px">✿</span>`;
-            
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.animationDuration = (Math.random() * 4 + 5) + 's';
-            container.appendChild(p);
-            setTimeout(() => { p.remove(); }, 8000);
+        if (distance < 70) {
+            document.body.style.transition = 'opacity 1s ease-in-out';
+            document.body.style.opacity = '0';
+            setTimeout(() => { 
+                window.location.href = "surat.html"; 
+            }, 1000);
         }
+    }
 
-        // Partikel latar belakang yang terus mengalir pelan
-        setInterval(createParticle, 800);
-        audio.onended = () => { resetBtn(); };
-    </script>
+    // Handler Input Khusus Safari
+    const setupButton = (id, key) => {
+        const btn = document.getElementById(id);
+        
+        const start = (e) => {
+            e.preventDefault();
+            input[key] = true;
+        };
+        
+        const end = (e) => {
+            e.preventDefault();
+            input[key] = false;
+        };
+
+        btn.addEventListener('touchstart', start, { passive: false });
+        btn.addEventListener('touchend', end, { passive: false });
+        btn.addEventListener('mousedown', start);
+        window.addEventListener('mouseup', end);
+    };
+
+    setupButton('up', 'up');
+    setupButton('down', 'down');
+    setupButton('left', 'left');
+    setupButton('right', 'right');
+
+    // Mencegah scroll/zoom saat main di Safari
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+
+    requestAnimationFrame(update);
+</script>
+
 </body>
 </html>
